@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Currency;
-use App\Http\Requests\StoreCurrency;
+use App\Http\Requests\StoreCurrencyRequest;
 
 class CurrenciesController extends Controller
 {
@@ -32,7 +32,7 @@ class CurrenciesController extends Controller
         return view('currency', ['title' => $currency[0]['title'], 'id' => $id, 'currency' => $currency]);
     }
 
-    public function store(StoreCurrency $request)
+    public function store(StoreCurrencyRequest $request)
     {
         $request->validated();
         $currency = new Currency(['title' => $request->post('title'), 'short_name' => $request->post('short_name'),
@@ -54,7 +54,7 @@ class CurrenciesController extends Controller
         return view('edit', ['id' => $id, 'currency' => $currency[0]]);
     }
 
-    public function update(StoreCurrency $request, $id)
+    public function update(StoreCurrencyRequest $request, $id)
     {
         $request->validated();
         $currency = Currency::find($id);
